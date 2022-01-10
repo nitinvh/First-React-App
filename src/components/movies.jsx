@@ -5,6 +5,7 @@ import {paginate} from '../utils/paginate';
 import ListGroup from './listGroup';
 import {getGenres} from '../services/fakeGenreService';
 import { filter } from 'lodash';
+import MoviesTable from './movieTables';
 
 
 class Movies extends Component {
@@ -48,31 +49,7 @@ class Movies extends Component {
                     </div>
                     <div className="col">
                         <p className='text-center m-5 text-info pb-5 display-4'>{filtered.length} Movies Available</p>
-                        <table className='table mt-5'>
-                        <thead className='thead-dark'>
-                            <tr>
-                            <th>Title</th>
-                            <th>Genre</th>
-                            <th>Stock</th>
-                            <th>Ratings</th>
-                            <th></th>
-                            <th></th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {movies.map(m => (
-                                <tr key={m._id}>
-                                    <td>{m.title}</td>
-                                    <td>{m.genre.name}</td>
-                                    <td>{m.numberInStock}</td>
-                                    <td>{m.dailyRentalRate}</td> 
-                                    <td><i className='fa fa-heart-o'></i></td>
-                                    <td><button className='btn btn-danger btn-lg' onClick={() => this.handleDelete(m)}>Delete</button></td>
-                                
-                                </tr>
-                            ))}
-                        </tbody>
-                        </table>
+                        <MoviesTable movies={movies} onDelete={this.handleDelete} />
                         <Pagination itemsCount={filtered.length} pageSize={this.state.pageSize} onPageChange={this.handlePageChange} currentPage={this.state.currentPage}  /> 
                     </div>
                 </div>
